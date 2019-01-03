@@ -3,4 +3,4 @@ datamodel: datamodel.prisma
 
 generate:
   - generator: graphql-schema
-    output: ./generated/prisma-graphql-client/
+    output: ./src/generated/prisma-graphql-client/
