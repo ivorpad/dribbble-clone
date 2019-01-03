@@ -1,0 +1,6 @@
+endpoint: http://localhost:4466/backend/dev
+datamodel: datamodel.prisma
+
+generate:
+  - generator: graphql-schema
+    output: ./generated/prisma-graphql-client/
