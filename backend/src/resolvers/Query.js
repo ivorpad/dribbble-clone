@@ -1,7 +1,9 @@
+const { forwardTo } = require("prisma-binding");
+
 const Query = {
-  dogs() {
-    return null
-  }
+  shots: forwardTo('db'),
+  shot: forwardTo('db'),
+  users: forwardTo('db')
 };
 
 module.exports = Query;

@@ -1,4 +1,29 @@
 type User {
   id: ID! @id
-  name: String!
+  name: String
+  email: String!
+  shots: [Shot] @relation(link: INLINE)
+  comments: [Comment] @relation(link: INLINE)
+}
+
+type Shot {
+  id: ID! @id
+  title: String!
+  description: String!
+  image: String!
+  largeImage: String!
+  likes: Int!
+  comments: [Comment] @relation(link: INLINE)
+  user: User!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Comment {
+  id: ID! @id
+  user: User!
+  shot: Shot!
+  content: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }

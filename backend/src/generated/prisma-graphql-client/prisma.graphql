@@ -1,3 +1,11 @@
+type AggregateComment {
+  count: Int!
+}
+
+type AggregateShot {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -6,9 +14,284 @@ type BatchPayload {
   count: Long!
 }
 
+type Comment {
+  id: ID!
+  user: User!
+  shot: Shot!
+  content: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CommentConnection {
+  pageInfo: PageInfo!
+  edges: [CommentEdge]!
+  aggregate: AggregateComment!
+}
+
+input CommentCreateInput {
+  user: UserCreateOneWithoutCommentsInput!
+  shot: ShotCreateOneWithoutCommentsInput!
+  content: String
+}
+
+input CommentCreateManyWithoutShotInput {
+  create: [CommentCreateWithoutShotInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateManyWithoutUserInput {
+  create: [CommentCreateWithoutUserInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutShotInput {
+  user: UserCreateOneWithoutCommentsInput!
+  content: String
+}
+
+input CommentCreateWithoutUserInput {
+  shot: ShotCreateOneWithoutCommentsInput!
+  content: String
+}
+
+type CommentEdge {
+  node: Comment!
+  cursor: String!
+}
+
+enum CommentOrderByInput {
+  id_ASC
+  id_DESC
+  content_ASC
+  content_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type CommentPreviousValues {
+  id: ID!
+  content: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input CommentScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [CommentScalarWhereInput!]
+  OR: [CommentScalarWhereInput!]
+  NOT: [CommentScalarWhereInput!]
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  node: Comment
+  updatedFields: [String!]
+  previousValues: CommentPreviousValues
+}
+
+input CommentSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CommentWhereInput
+  AND: [CommentSubscriptionWhereInput!]
+  OR: [CommentSubscriptionWhereInput!]
+  NOT: [CommentSubscriptionWhereInput!]
+}
+
+input CommentUpdateInput {
+  user: UserUpdateOneRequiredWithoutCommentsInput
+  shot: ShotUpdateOneRequiredWithoutCommentsInput
+  content: String
+}
+
+input CommentUpdateManyDataInput {
+  content: String
+}
+
+input CommentUpdateManyMutationInput {
+  content: String
+}
+
+input CommentUpdateManyWithoutShotInput {
+  create: [CommentCreateWithoutShotInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutShotInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutShotInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
+}
+
+input CommentUpdateManyWithoutUserInput {
+  create: [CommentCreateWithoutUserInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
+}
+
+input CommentUpdateManyWithWhereNestedInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyDataInput!
+}
+
+input CommentUpdateWithoutShotDataInput {
+  user: UserUpdateOneRequiredWithoutCommentsInput
+  content: String
+}
+
+input CommentUpdateWithoutUserDataInput {
+  shot: ShotUpdateOneRequiredWithoutCommentsInput
+  content: String
+}
+
+input CommentUpdateWithWhereUniqueWithoutShotInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutShotDataInput!
+}
+
+input CommentUpdateWithWhereUniqueWithoutUserInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutUserDataInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutShotInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutShotDataInput!
+  create: CommentCreateWithoutShotInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutUserInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutUserDataInput!
+  create: CommentCreateWithoutUserInput!
+}
+
+input CommentWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  user: UserWhereInput
+  shot: ShotWhereInput
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
 scalar Long
 
 type Mutation {
+  createComment(data: CommentCreateInput!): Comment!
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
+  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteManyComments(where: CommentWhereInput): BatchPayload!
+  createShot(data: ShotCreateInput!): Shot!
+  updateShot(data: ShotUpdateInput!, where: ShotWhereUniqueInput!): Shot
+  updateManyShots(data: ShotUpdateManyMutationInput!, where: ShotWhereInput): BatchPayload!
+  upsertShot(where: ShotWhereUniqueInput!, create: ShotCreateInput!, update: ShotUpdateInput!): Shot!
+  deleteShot(where: ShotWhereUniqueInput!): Shot
+  deleteManyShots(where: ShotWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -35,19 +318,431 @@ type PageInfo {
 }
 
 type Query {
+  comment(where: CommentWhereUniqueInput!): Comment
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
+  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
+  shot(where: ShotWhereUniqueInput!): Shot
+  shots(where: ShotWhereInput, orderBy: ShotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Shot]!
+  shotsConnection(where: ShotWhereInput, orderBy: ShotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ShotConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   node(id: ID!): Node
 }
 
+type Shot {
+  id: ID!
+  title: String!
+  description: String!
+  image: String!
+  largeImage: String!
+  likes: Int!
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
+  user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ShotConnection {
+  pageInfo: PageInfo!
+  edges: [ShotEdge]!
+  aggregate: AggregateShot!
+}
+
+input ShotCreateInput {
+  title: String!
+  description: String!
+  image: String!
+  largeImage: String!
+  likes: Int!
+  comments: CommentCreateManyWithoutShotInput
+  user: UserCreateOneWithoutShotsInput!
+}
+
+input ShotCreateManyWithoutUserInput {
+  create: [ShotCreateWithoutUserInput!]
+  connect: [ShotWhereUniqueInput!]
+}
+
+input ShotCreateOneWithoutCommentsInput {
+  create: ShotCreateWithoutCommentsInput
+  connect: ShotWhereUniqueInput
+}
+
+input ShotCreateWithoutCommentsInput {
+  title: String!
+  description: String!
+  image: String!
+  largeImage: String!
+  likes: Int!
+  user: UserCreateOneWithoutShotsInput!
+}
+
+input ShotCreateWithoutUserInput {
+  title: String!
+  description: String!
+  image: String!
+  largeImage: String!
+  likes: Int!
+  comments: CommentCreateManyWithoutShotInput
+}
+
+type ShotEdge {
+  node: Shot!
+  cursor: String!
+}
+
+enum ShotOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  description_ASC
+  description_DESC
+  image_ASC
+  image_DESC
+  largeImage_ASC
+  largeImage_DESC
+  likes_ASC
+  likes_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ShotPreviousValues {
+  id: ID!
+  title: String!
+  description: String!
+  image: String!
+  largeImage: String!
+  likes: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ShotScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  largeImage: String
+  largeImage_not: String
+  largeImage_in: [String!]
+  largeImage_not_in: [String!]
+  largeImage_lt: String
+  largeImage_lte: String
+  largeImage_gt: String
+  largeImage_gte: String
+  largeImage_contains: String
+  largeImage_not_contains: String
+  largeImage_starts_with: String
+  largeImage_not_starts_with: String
+  largeImage_ends_with: String
+  largeImage_not_ends_with: String
+  likes: Int
+  likes_not: Int
+  likes_in: [Int!]
+  likes_not_in: [Int!]
+  likes_lt: Int
+  likes_lte: Int
+  likes_gt: Int
+  likes_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ShotScalarWhereInput!]
+  OR: [ShotScalarWhereInput!]
+  NOT: [ShotScalarWhereInput!]
+}
+
+type ShotSubscriptionPayload {
+  mutation: MutationType!
+  node: Shot
+  updatedFields: [String!]
+  previousValues: ShotPreviousValues
+}
+
+input ShotSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ShotWhereInput
+  AND: [ShotSubscriptionWhereInput!]
+  OR: [ShotSubscriptionWhereInput!]
+  NOT: [ShotSubscriptionWhereInput!]
+}
+
+input ShotUpdateInput {
+  title: String
+  description: String
+  image: String
+  largeImage: String
+  likes: Int
+  comments: CommentUpdateManyWithoutShotInput
+  user: UserUpdateOneRequiredWithoutShotsInput
+}
+
+input ShotUpdateManyDataInput {
+  title: String
+  description: String
+  image: String
+  largeImage: String
+  likes: Int
+}
+
+input ShotUpdateManyMutationInput {
+  title: String
+  description: String
+  image: String
+  largeImage: String
+  likes: Int
+}
+
+input ShotUpdateManyWithoutUserInput {
+  create: [ShotCreateWithoutUserInput!]
+  delete: [ShotWhereUniqueInput!]
+  connect: [ShotWhereUniqueInput!]
+  disconnect: [ShotWhereUniqueInput!]
+  update: [ShotUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [ShotUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [ShotScalarWhereInput!]
+  updateMany: [ShotUpdateManyWithWhereNestedInput!]
+}
+
+input ShotUpdateManyWithWhereNestedInput {
+  where: ShotScalarWhereInput!
+  data: ShotUpdateManyDataInput!
+}
+
+input ShotUpdateOneRequiredWithoutCommentsInput {
+  create: ShotCreateWithoutCommentsInput
+  update: ShotUpdateWithoutCommentsDataInput
+  upsert: ShotUpsertWithoutCommentsInput
+  connect: ShotWhereUniqueInput
+}
+
+input ShotUpdateWithoutCommentsDataInput {
+  title: String
+  description: String
+  image: String
+  largeImage: String
+  likes: Int
+  user: UserUpdateOneRequiredWithoutShotsInput
+}
+
+input ShotUpdateWithoutUserDataInput {
+  title: String
+  description: String
+  image: String
+  largeImage: String
+  likes: Int
+  comments: CommentUpdateManyWithoutShotInput
+}
+
+input ShotUpdateWithWhereUniqueWithoutUserInput {
+  where: ShotWhereUniqueInput!
+  data: ShotUpdateWithoutUserDataInput!
+}
+
+input ShotUpsertWithoutCommentsInput {
+  update: ShotUpdateWithoutCommentsDataInput!
+  create: ShotCreateWithoutCommentsInput!
+}
+
+input ShotUpsertWithWhereUniqueWithoutUserInput {
+  where: ShotWhereUniqueInput!
+  update: ShotUpdateWithoutUserDataInput!
+  create: ShotCreateWithoutUserInput!
+}
+
+input ShotWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  largeImage: String
+  largeImage_not: String
+  largeImage_in: [String!]
+  largeImage_not_in: [String!]
+  largeImage_lt: String
+  largeImage_lte: String
+  largeImage_gt: String
+  largeImage_gte: String
+  largeImage_contains: String
+  largeImage_not_contains: String
+  largeImage_starts_with: String
+  largeImage_not_starts_with: String
+  largeImage_ends_with: String
+  largeImage_not_ends_with: String
+  likes: Int
+  likes_not: Int
+  likes_in: [Int!]
+  likes_not_in: [Int!]
+  likes_lt: Int
+  likes_lte: Int
+  likes_gt: Int
+  likes_gte: Int
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
+  user: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ShotWhereInput!]
+  OR: [ShotWhereInput!]
+  NOT: [ShotWhereInput!]
+}
+
+input ShotWhereUniqueInput {
+  id: ID
+}
+
 type Subscription {
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+  shot(where: ShotSubscriptionWhereInput): ShotSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User {
   id: ID!
-  name: String!
+  name: String
+  email: String!
+  shots(where: ShotWhereInput, orderBy: ShotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Shot!]
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
 }
 
 type UserConnection {
@@ -57,7 +752,32 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  name: String!
+  name: String
+  email: String!
+  shots: ShotCreateManyWithoutUserInput
+  comments: CommentCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutShotsInput {
+  create: UserCreateWithoutShotsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCommentsInput {
+  name: String
+  email: String!
+  shots: ShotCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutShotsInput {
+  name: String
+  email: String!
+  comments: CommentCreateManyWithoutUserInput
 }
 
 type UserEdge {
@@ -70,6 +790,8 @@ enum UserOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  email_ASC
+  email_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -78,7 +800,8 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  name: String!
+  name: String
+  email: String!
 }
 
 type UserSubscriptionPayload {
@@ -101,10 +824,50 @@ input UserSubscriptionWhereInput {
 
 input UserUpdateInput {
   name: String
+  email: String
+  shots: ShotUpdateManyWithoutUserInput
+  comments: CommentUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
+  email: String
+}
+
+input UserUpdateOneRequiredWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  update: UserUpdateWithoutCommentsDataInput
+  upsert: UserUpsertWithoutCommentsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutShotsInput {
+  create: UserCreateWithoutShotsInput
+  update: UserUpdateWithoutShotsDataInput
+  upsert: UserUpsertWithoutShotsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutCommentsDataInput {
+  name: String
+  email: String
+  shots: ShotUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutShotsDataInput {
+  name: String
+  email: String
+  comments: CommentUpdateManyWithoutUserInput
+}
+
+input UserUpsertWithoutCommentsInput {
+  update: UserUpdateWithoutCommentsDataInput!
+  create: UserCreateWithoutCommentsInput!
+}
+
+input UserUpsertWithoutShotsInput {
+  update: UserUpdateWithoutShotsDataInput!
+  create: UserCreateWithoutShotsInput!
 }
 
 input UserWhereInput {
@@ -136,6 +899,26 @@ input UserWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  shots_every: ShotWhereInput
+  shots_some: ShotWhereInput
+  shots_none: ShotWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
