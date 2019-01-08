@@ -1,5 +1,5 @@
 import React from 'react'
-import { Fielset, Form, Button } from './styles'
+import { Fieldset, Form, Button } from './styles'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Router from 'next/router'
@@ -48,7 +48,7 @@ class ShotForm extends React.Component {
       ]}>
         {(createShot, { loading, error }) => {
           return (
-            <Fielset>
+            <Fieldset>
               <Form onSubmit={e => e.preventDefault()}>
                 <label htmlFor="title">
                   Title <br />
@@ -90,7 +90,7 @@ class ShotForm extends React.Component {
                   Submit
                 </Button>
               </Form>
-            </Fielset>
+            </Fieldset>
           );
         }}
       </Mutation>

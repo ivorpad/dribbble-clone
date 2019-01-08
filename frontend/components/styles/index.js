@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Fielset = styled.fieldset`
+export const Fieldset = styled.fieldset`
   border: none;
   padding: 0;
 `;
