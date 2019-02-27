@@ -1,21 +1,49 @@
 # import * from './generated/prisma-graphql-client/prisma.graphql'
 
-type Mutation {
-  createShot(
-    title: String, 
-    description: String, 
-    image: String, 
-    largeImage: String, 
-    likes: Int,
-  ): Shot!
-  createUser(name: String, email: String): User!
-  createComment(content: String!): Comment!
-}
+scalar Upload
 
 type Query {
   shot(where: ShotWhereUniqueInput!): Shot
-  shots(where: ShotWhereInput, orderBy: ShotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Shot]!
+  shots(
+    where: ShotWhereInput
+    orderBy: ShotOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Shot]!
   comment(where: CommentWhereUniqueInput!): Comment
-  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  comments(
+    where: CommentWhereInput
+    orderBy: CommentOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Comment]!
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User]!
+  uploads: [File]
+}
+
+type Mutation {
+  createShot(
+    title: String
+    description: String
+    image: String
+    largeImage: String
+    likes: Int
+  ): Shot!
+  createUser(name: String, email: String): User!
+  createComment(content: String!): Comment!
+  singleUpload(file: Upload!): Boolean!
 }

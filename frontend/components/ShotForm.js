@@ -1,10 +1,9 @@
-import React from 'react'
-import { Fieldset, Form, Button } from './styles'
-import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
-import Router from 'next/router'
-import { ALL_SHOTS_QUERY } from './Shots'
-
+import React from "react";
+import { Fieldset, Form, Button } from "./styles";
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
+import Router from "next/router";
+import { ALL_SHOTS_QUERY } from "./Shots";
 
 const CREATE_SHOT_MUTATION = gql`
   mutation CREATE_SHOT_MUTATION(
@@ -32,10 +31,17 @@ class ShotForm extends React.Component {
     image: "",
     description: "",
     largeImage: "/static/img.png",
-    likes: 0
+    likes: 0,
+    another: ""
   };
 
   handleChange = e => {
+    const {
+      target: { validity, files }
+    } = e;
+
+    console.log(files);
+
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -43,9 +49,10 @@ class ShotForm extends React.Component {
 
   render() {
     return (
-      <Mutation mutation={CREATE_SHOT_MUTATION} variables={this.state} refetchQueries={[
-        { query: ALL_SHOTS_QUERY }
-      ]}>
+      <Mutation
+        mutation={CREATE_SHOT_MUTATION}
+        variables={this.state}
+        refetchQueries={[{ query: ALL_SHOTS_QUERY }]}>
         {(createShot, { loading, error }) => {
           return (
             <Fieldset>
@@ -84,9 +91,8 @@ class ShotForm extends React.Component {
                   onClick={e => {
                     e.preventDefault;
                     createShot();
-                    Router.push('/')
-                  }}
-                >
+                    Router.push("/");
+                  }}>
                   Submit
                 </Button>
               </Form>
@@ -98,4 +104,4 @@ class ShotForm extends React.Component {
   }
 }
 
-export default ShotForm
+export default ShotForm;

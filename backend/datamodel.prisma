@@ -27,3 +27,10 @@ type Comment {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
+
+type File {
+  id: ID! @id
+  filename: String!
+  mimetype: String!
+  encoding: String!
+}
