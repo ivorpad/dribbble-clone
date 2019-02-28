@@ -17,11 +17,19 @@ const storeUpload = async ({ stream, filename }) => {
   );
 };
 
-const processUpload = async upload => {
+const processUpload = async (upload, db) => {
   const { stream, filename, mimetype, encoding } = await upload;
   const { id, path } = await storeUpload({ stream, filename });
 
-  return true;
+  const file = await db.mutation.createFile({
+    data: {
+      filename: `${id}-${filename}`,
+      mimetype,
+      encoding
+    }
+  });
+
+  return file;
 };
 
 module.exports = {

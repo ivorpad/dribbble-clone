@@ -4,6 +4,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import Router from "next/router";
 import { ALL_SHOTS_QUERY } from "./Shots";
+import UploadExample from "./UploadExample";
 
 const CREATE_SHOT_MUTATION = gql`
   mutation CREATE_SHOT_MUTATION(
@@ -21,6 +22,15 @@ const CREATE_SHOT_MUTATION = gql`
       likes: $likes
     ) {
       id
+    }
+  }
+`;
+
+const UPLOAD_FILE_MUTATION = gql`
+  mutation UPLOAD_FILE_MUTATION($file: Upload!) {
+    singleUpload(file: $file) {
+      id
+      filename
     }
   }
 `;
@@ -66,15 +76,7 @@ class ShotForm extends React.Component {
                     id="title"
                   />
                 </label>
-                <label htmlFor="file">
-                  Image <br />
-                  <input
-                    onChange={this.handleChange}
-                    type="file"
-                    name="file"
-                    id="file"
-                  />
-                </label>
+                <UploadExample />
                 <label htmlFor="description">
                   Description <br />
                   <textarea

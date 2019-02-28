@@ -45,5 +45,5 @@ type Mutation {
   ): Shot!
   createUser(name: String, email: String): User!
   createComment(content: String!): Comment!
-  singleUpload(file: Upload!): Boolean!
+  singleUpload(file: Upload!): File!
 }

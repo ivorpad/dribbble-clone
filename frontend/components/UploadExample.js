@@ -4,7 +4,10 @@ import gql from "graphql-tag";
 
 const UPLOAD_FILE_MUTATION = gql`
   mutation UPLOAD_FILE_MUTATION($file: Upload!) {
-    singleUpload(file: $file)
+    singleUpload(file: $file) {
+      id
+      filename
+    }
   }
 `;
 
@@ -25,29 +28,31 @@ export class UploadExample extends Component {
   };
 
   render() {
-    const { file } = this.state;
-    console.log(file);
     return (
       <Mutation mutation={UPLOAD_FILE_MUTATION}>
-        {(uploadFile, { loading, error }) => {
+        {(uploadFile, { loading, error, data }) => {
+          console.log(data);
           return (
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-                const { file } = this.state;
-
-                uploadFile({
-                  variables: { file: file }
-                });
-              }}>
+            <label htmlFor="file">
+              Image <br />
               <input
                 type="file"
                 name="upload"
                 id="upload"
-                onChange={this.setFile}
+                onChange={e => {
+                  const {
+                    target: {
+                      validity,
+                      files: [file]
+                    }
+                  } = e;
+
+                  uploadFile({
+                    variables: { file: file }
+                  });
+                }}
               />
-              <input type="submit" value="submit" />
-            </form>
+            </label>
           );
         }}
       </Mutation>

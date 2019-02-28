@@ -59,8 +59,8 @@ const Mutations = {
     return comment;
   },
 
-  singleUpload: async (parent, { file }) => {
-    return processUpload(file);
+  singleUpload: async (parent, { file }, { db }, info) => {
+    return processUpload(file, db);
   }
 };
 

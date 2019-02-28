@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ShotForm from "../../components/ShotForm";
-import UploadExample from "../../components/UploadExample";
 import styled from "styled-components";
 
 const FormContainer = styled.div`
@@ -13,8 +12,7 @@ export class NewShot extends Component {
     return (
       <FormContainer>
         <h2>New Shot</h2>
-        {/* <ShotForm /> */}
-        <UploadExample />
+        <ShotForm />
       </FormContainer>
     );
   }
