@@ -4,7 +4,7 @@ const Query = {
   shots: forwardTo("db"),
   shot: forwardTo("db"),
   users: forwardTo("db"),
-  uploads: forwardTo("db")
+  files: forwardTo("db")
 };
 
 module.exports = Query;

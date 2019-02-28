@@ -17,16 +17,18 @@ const Mutations = {
   },
   async createShot(_, args, { db }, info) {
     // first check if the user is logged in!
-    console.log(args);
 
     const user = await db.query.user({
       where: { id: "5c6014c7fca1360008763c26" }
     });
 
+    const image = await processUpload(args.image);
+
     const shot = await db.mutation.createShot(
       {
         data: {
           ...args,
+          image,
           user: { connect: { id: user.id } }
         }
       },

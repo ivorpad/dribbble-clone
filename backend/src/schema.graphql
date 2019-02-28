@@ -32,15 +32,14 @@ type Query {
     first: Int
     last: Int
   ): [User]!
-  uploads: [File]
+  files: [File]
 }
 
 type Mutation {
   createShot(
     title: String
     description: String
-    image: String
-    largeImage: String
+    image: Upload
     likes: Int
   ): Shot!
   createUser(name: String, email: String): User!

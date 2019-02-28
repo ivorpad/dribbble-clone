@@ -489,8 +489,7 @@ type Shot {
   id: ID!
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: String
   likes: Int!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
   user: User!
@@ -507,8 +506,7 @@ type ShotConnection {
 input ShotCreateInput {
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: String
   likes: Int!
   comments: CommentCreateManyWithoutShotInput
   user: UserCreateOneWithoutShotsInput!
@@ -527,8 +525,7 @@ input ShotCreateOneWithoutCommentsInput {
 input ShotCreateWithoutCommentsInput {
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: String
   likes: Int!
   user: UserCreateOneWithoutShotsInput!
 }
@@ -536,8 +533,7 @@ input ShotCreateWithoutCommentsInput {
 input ShotCreateWithoutUserInput {
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: String
   likes: Int!
   comments: CommentCreateManyWithoutShotInput
 }
@@ -556,8 +552,6 @@ enum ShotOrderByInput {
   description_DESC
   image_ASC
   image_DESC
-  largeImage_ASC
-  largeImage_DESC
   likes_ASC
   likes_DESC
   createdAt_ASC
@@ -570,8 +564,7 @@ type ShotPreviousValues {
   id: ID!
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: String
   likes: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -634,20 +627,6 @@ input ShotScalarWhereInput {
   image_not_starts_with: String
   image_ends_with: String
   image_not_ends_with: String
-  largeImage: String
-  largeImage_not: String
-  largeImage_in: [String!]
-  largeImage_not_in: [String!]
-  largeImage_lt: String
-  largeImage_lte: String
-  largeImage_gt: String
-  largeImage_gte: String
-  largeImage_contains: String
-  largeImage_not_contains: String
-  largeImage_starts_with: String
-  largeImage_not_starts_with: String
-  largeImage_ends_with: String
-  largeImage_not_ends_with: String
   likes: Int
   likes_not: Int
   likes_in: [Int!]
@@ -699,7 +678,6 @@ input ShotUpdateInput {
   title: String
   description: String
   image: String
-  largeImage: String
   likes: Int
   comments: CommentUpdateManyWithoutShotInput
   user: UserUpdateOneRequiredWithoutShotsInput
@@ -709,7 +687,6 @@ input ShotUpdateManyDataInput {
   title: String
   description: String
   image: String
-  largeImage: String
   likes: Int
 }
 
@@ -717,7 +694,6 @@ input ShotUpdateManyMutationInput {
   title: String
   description: String
   image: String
-  largeImage: String
   likes: Int
 }
 
@@ -748,7 +724,6 @@ input ShotUpdateWithoutCommentsDataInput {
   title: String
   description: String
   image: String
-  largeImage: String
   likes: Int
   user: UserUpdateOneRequiredWithoutShotsInput
 }
@@ -757,7 +732,6 @@ input ShotUpdateWithoutUserDataInput {
   title: String
   description: String
   image: String
-  largeImage: String
   likes: Int
   comments: CommentUpdateManyWithoutShotInput
 }
@@ -835,20 +809,6 @@ input ShotWhereInput {
   image_not_starts_with: String
   image_ends_with: String
   image_not_ends_with: String
-  largeImage: String
-  largeImage_not: String
-  largeImage_in: [String!]
-  largeImage_not_in: [String!]
-  largeImage_lt: String
-  largeImage_lte: String
-  largeImage_gt: String
-  largeImage_gte: String
-  largeImage_contains: String
-  largeImage_not_contains: String
-  largeImage_starts_with: String
-  largeImage_not_starts_with: String
-  largeImage_ends_with: String
-  largeImage_not_ends_with: String
   likes: Int
   likes_not: Int
   likes_in: [Int!]

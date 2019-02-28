@@ -31,7 +31,7 @@ export class UploadExample extends Component {
     return (
       <Mutation mutation={UPLOAD_FILE_MUTATION}>
         {(uploadFile, { loading, error, data }) => {
-          console.log(data);
+          console.log(data, loading, error);
           return (
             <label htmlFor="file">
               Image <br />

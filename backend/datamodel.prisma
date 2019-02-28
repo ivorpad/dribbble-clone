@@ -10,8 +10,7 @@ type Shot {
   id: ID! @id
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: String
   likes: Int!
   comments: [Comment] @relation(link: INLINE)
   user: User!
